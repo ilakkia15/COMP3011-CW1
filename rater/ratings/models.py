@@ -7,9 +7,15 @@ class Professor(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.professor_id + " - " + self.first_name + " " + self.last_name
+
 class Module(models.Model):
     module_code = models.CharField(max_length=3, unique=True)
     module_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.module_code + " - " + self.module_name
 
 class Instance(models.Model):
     professor = models.ManyToManyField(Professor)
@@ -26,12 +32,19 @@ class Instance(models.Model):
     ]
     semester = models.PositiveIntegerField(choices=semester_choices)
 
+    # TODO: Return the corresponding instance information
+    def __str__(self):
+        return self.professor + " - " + self.module
+
 class Student(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.first_name + " " + self.last_name
 
 class Rating(models.Model):
     instance = models.ForeignKey(Instance, on_delete=models.PROTECT)
@@ -46,3 +59,6 @@ class Rating(models.Model):
         (5, '5 Stars'),
     ]
     rating = models.PositiveIntegerField(choices=rating_choices)
+
+    def __str__(self):
+        return self.rating
