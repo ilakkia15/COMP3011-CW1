@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ratings.views import Register
+from ratings.views import HandleRegisterRequest
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path ('api/register/', Register),
+    path('api/register/', HandleRegisterRequest),
 ]
