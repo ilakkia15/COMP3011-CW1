@@ -24,27 +24,29 @@ def Register():
     # Display a message to the user to provide the required details.
     print("Please provide a username, email and password to register.")
 
+    # Get a username, email and password from the user.
     username = GetInput("username")
     email = GetInput("email")
     password = GetInput("password")
 
 def GetCommand():
-    # Create a boolean variable to determine whether the command is valid.
+    # Create a boolean variable to determine whether a given command is valid.
     valid = False
     # Loop until a valid command has been provided.
     while not valid:
         # Retrieve the command.
         command = input("").split()
 
-        print("Command:", command)
-        print("Length:", len(command))
+        # TODO: Add calls to functions for all the commands. 
 
         # Check whether a command has been provided.
         if len(command) > 0:
             # Check whether the command exists and the number of arguments is correct.
             # Set the boolean variable to True if the command is valid.
+            # Call the corresponding function if the command is valid.
             if command[0] == "register" and len(command) == 1:
                 valid = True
+                Register()
             elif command[0] == "login" and len(command) == 2:
                 valid = True
             elif command[0] == "logout" and len(command) == 1:
@@ -66,13 +68,11 @@ def GetCommand():
             # Display a message to provide a valid command.
             print("Please provide a valid command.")
 
-    return command
-
 def main():
     # Run continuously.
     while True:
-        # Get a command from the user.
-        command = GetCommand()
+        # Get the command provided by the user.
+        GetCommand()
 
 if __name__=="__main__":
     main()
